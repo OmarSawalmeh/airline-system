@@ -1,0 +1,23 @@
+{
+  "name": "airline-system",
+  "description": "build a control system for an Airline Using Events-Node.js",
+  "version": "1.0.0",
+  "main": "events.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OmarSawalmeh/airline-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OmarSawalmeh/airline-system/issues"
+  },
+  "homepage": "https://github.com/OmarSawalmeh/airline-system#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^7.3.0"
+  }
+}
