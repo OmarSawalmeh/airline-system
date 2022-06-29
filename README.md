@@ -1,5 +1,5 @@
 # **Airline-System**
-Build a control system for an Airline Using Events-Node.js
+Build a control system for an Airline Using Socket-IO NodeJS
 
 ### **UML Daigram :**
-![](./img//Event%20UML.jpg)
+![](./img/UML%20airlineSystem.jpg)
