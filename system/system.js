@@ -20,6 +20,8 @@
 
 'use strict';
 
+const uuid = require('uuid').v4;
+
 require('dotenv').config();
 const PORT = process.env.PORT || 3080;
 
@@ -27,6 +29,12 @@ const PORT = process.env.PORT || 3080;
 const io_server = require('socket.io')(PORT);
 // namespace
 const airline = io_server.of('/airline');
+
+let queue = {
+    flights:{
+
+    }
+}
 
 
 io_server.on('connection', (Socket)=>{
@@ -38,6 +46,10 @@ io_server.on('connection', (Socket)=>{
         payload.Flight.event = 'new-flight’';
         payload.Flight.time = new Date();
         console.log(payload);
+
+        const id = uuid();
+        queue.flights[id] = payload;
+        Socket.emit('flight', {id:id, payload:queue.flights[id]});
     }
 
 
@@ -57,6 +69,19 @@ io_server.on('connection', (Socket)=>{
         payload.Flight.time = new Date();
         console.log(payload);
     }
+
+
+    Socket.on('get-all', ()=>{
+        console.log('Get All Flight');
+        Object.keys(queue.flights).forEach((id)=>{
+            Socket.emit('flight', {id:id , payload:queue.flights[id].Flight, queue: queue})
+        });
+
+        Socket.on('delete', (flight)=>{
+            delete queue.flights[flight.id];
+            //console.log('Flight done and deleted');
+        });
+    })
 });
 
 
