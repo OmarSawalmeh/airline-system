@@ -64,6 +64,14 @@ setInterval(()=>{
         console.log(`Pilot: flight with ID ${Flight.Flight.Details.flightID} took-off`);
         connectionAirline.emit('took-off', Flight);
     }, 4000);
+
+    connection.emit('get-all')
+    connection.on('flight', (flight)=>{
+        flight.queue.flights[flight.id] = flight.payload
+        console.log(flight.queue);
+
+        connection.emit('delete', flight);
+    })
 }, 10000);
 
 
